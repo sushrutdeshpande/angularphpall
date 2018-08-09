@@ -1,0 +1,80 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+</div>
+<div class="row custom-row" style="padding:10px 20px;">
+  <div class= "col-sm-5 custom-container jumbotron">
+    <div class="container">   
+    <form class="form-horizontal" novalidate (ngSubmit)="onFormSubmit(signupForm)" #signupForm="ngForm">
+        <fieldset>
+            <legend>SignUp</legend>
+            <!--- Email Block --->
+            <div class="form-group">
+                <label for="inputEmail">Email</label>
+                <input type="text" class="form-control" id="inputEmail" placeholder="Email" [ngModel] = "user.email" name="email" #email = "ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+            </div>
+
+            <!-- This is the error section -->
+
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                <div *ngIf = "email.errors?.required">
+                    Email field can't be blank
+                </div>
+                <div *ngIf = "email.errors?.pattern && email.touched">
+                    The email id doesn't seem right
+                </div>
+             </div>
+
+            <!--- Password Block --->
+            <div ngModelGroup="password" #userPassword="ngModelGroup" required>
+                <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Password" minlength="8" [(ngModel)] = "user.password.pwd" name="pwd">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword" >Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="Password" ngModel name="confirmPwd">
+                </div>
+            </div>
+
+            <div *ngIf="(userPassword.invalid|| userPassword.value?.pwd != userPassword.value?.confirmPwd) && (userPassword.touched)" class="alert alert-danger">
+                <div *ngIf = "userPassword.invalid; else nomatch">
+                    Password needs to be more than 8 characters
+                </div>
+                <ng-template #nomatch >
+                    Passwords don't match
+                </ng-template>
+            </div>
+            <!--- Select gender Block --->
+            <div class="form-group">
+              <label for="select">Gender</label>
+                   <select id="select" [(ngModel)] = "user.gender" name = "gender" class="form-control">
+
+                     <option *ngFor = "let g of gender"
+                       [value] = "g"> {{g}} 
+                     </option>
+                   </select>
+               </div>
+
+            <!--- Terms and conditions Block --->
+<!--             <div class="form-group checkbox">
+              <label>
+                <input type="checkbox"> Confirm that you've read the Terms and Conditions
+              </label>
+            </div>-->
+
+           <!--- Buttons Block --->
+            <div class="form-group">
+                <button type="reset" class="btn btn-danger" style="margin-right: 5px;">Cancel</button>
+                <button type="submit" class="btn btn-success" [disabled]="!signupForm.form.valid">Submit</button>
+            </div>
+        </fieldset>
+    </form>
+</div>        
+{{signupForm.value | json}}
+  </div>
+</div>
