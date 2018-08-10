@@ -14,7 +14,7 @@ private title = 'App';
   genderList: String[];
     signupForm: FormGroup;
   private user:User;
-constructor(private fb:FormBuilder,private signupserv: AuthService){
+constructor(private fb:FormBuilder,private register: AuthService){
 }
 
    ngOnInit() {
@@ -44,7 +44,7 @@ constructor(private fb:FormBuilder,private signupserv: AuthService){
     get terms() { return this.signupForm.get('terms'); }
 
 public onFormSubmit() {
-        if(this.signupForm.valid) {
+        if(this.signupForm.invalid) {
             this.user = this.signupForm.value;
             this.signupserv.postData(this.user);
             console.log(this.user);
