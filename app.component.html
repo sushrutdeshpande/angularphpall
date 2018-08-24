@@ -1,0 +1,37 @@
+<div class="container">
+  <h2>Simple Collapsible</h2>
+<div style = "width:100%;">
+   <div style = "width:40%;float:left;border:solid 1px black;">
+      <h6>Uppercase Pipe</h6>
+      <b>{{title | uppercase}}</b><br/>
+      
+      <h6>Lowercase Pipe</h6>
+      <b>{{title | lowercase}}</b>
+      
+      <h6>Currency Pipe</h6>
+      <b>{{6589.23 | currency:"INR"}}</b><br/>
+      <b>{{6589.23 | currency:"USD":true}}</b> //Boolean true is used to get the sign of the currency.
+      
+      <h6>Date pipe</h6>
+      <b>{{todaydate | date:'M/d/y'}}</b><br/><br/>
+      <b>{{todaydate | date:'shortTime'}}</b>
+      
+      <h6>Decimal Pipe</h6>
+      <b>{{ 454.78787814 | number: '3.5' }}</b> // 3 is for main integer, 4 -4 are for integers to be displayed.
+   </div>
+   
+   <div style = "width:40%;float:left;border:solid 1px black;">
+      <h6>Json Pipe</h6>
+      <b>{{ jsonval | json }}</b>
+      <h6>Percent Pipe</h6>
+      <b>{{00.54565 | percent}}</b>
+      <h6>Slice Pipe</h6>
+      <b>{{months | slice:2:6}}</b> 
+      // here 2 and 6 refers to the start and the end index
+<h6>Custom Filter</h6>
+<b>sushrut</b><br />
+<b>{{ 'sushrut' | reverseStr }}</b>
+   </div>
+</div>
+
+
